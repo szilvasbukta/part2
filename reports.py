@@ -2,6 +2,19 @@
 # Report functions
 
 
+def get_most_played(file_name):
+    with open(file_name, 'r') as opened_file:
+        most_copies = ['', 0]   # game title, copies_sold
+        for line in opened_file:
+            line = line.split("\t")
+            if float(line[1]) > float(most_copies[1]):
+                most_copies[1] = line[1]
+                most_copies[0] = line[0]
+            elif float(line[1]) == float(most_copies[1]):
+                pass
+        return most_copies[0]
+
+
 def sum_sold(file_name):
     count = float(0)
     with open(file_name, 'r') as f:
@@ -13,7 +26,7 @@ def sum_sold(file_name):
 
 def get_selling_avg(file_name):
     with open(file_name, 'r') as f:
-        games= 0
+        games = 0
         sold_copies = float(0)
         for line in f:
             line = line.split("\t")
@@ -21,6 +34,16 @@ def get_selling_avg(file_name):
             sold_copies += float(line[1])
         output = sold_copies / float(games)
     return output
+
+                
+def count_longest_title(file_name):
+    with open(file_name, 'r') as opened_file:
+        characters_long = [0]
+        for line in opened_file:
+            line = line.split("\t")
+            if len(line[0]) > characters_long[0]:
+                characters_long[0] = len(line[0])
+        return(characters_long[0])
 
 
 def get_game(file_name, title):
