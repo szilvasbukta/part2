@@ -22,3 +22,13 @@ def get_selling_avg(file_name):
         output = sold_copies / float(games)
     return output
 
+
+def get_game(file_name, title):
+    with open(file_name, 'r') as f:
+        for line in f:
+            line = line.split("\t")
+            line[4] = line[4].strip("\n")
+            line[1] = float(line[1])
+            line[2] = int(line[2])
+            if line[0] == title:
+                return line
