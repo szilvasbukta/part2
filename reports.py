@@ -10,8 +10,6 @@ def get_most_played(file_name):
             if float(line[1]) > float(most_copies[1]):
                 most_copies[1] = line[1]
                 most_copies[0] = line[0]
-            elif float(line[1]) == float(most_copies[1]):
-                pass
         return most_copies[0]
 
 
@@ -34,8 +32,8 @@ def get_selling_avg(file_name):
             sold_copies += float(line[1])
         output = sold_copies / float(games)
     return output
-     
-                
+
+
 def count_longest_title(file_name):
     with open(file_name, 'r') as opened_file:
         characters_long = [0]
@@ -67,3 +65,12 @@ def get_game(file_name, title):
             line[2] = int(line[2])
             if line[0] == title:
                 return line
+
+
+def count_grouped_by_genre(file_name):
+    dict_of_games = {}
+    with open(file_name, 'r') as opened_file:
+        for line in opened_file:
+            line = line.split("\t")
+            dict_of_games[line[3]] = dict_of_games.get(line[3], 0) + 1
+        return dict_of_games
