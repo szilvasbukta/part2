@@ -2,6 +2,15 @@
 # Report functions
 
 
+def sum_sold(file_name):
+    count = float(0)
+    with open(file_name, 'r') as f:
+        for line in f:
+            game_info = line.split("\t")
+            count += float(game_info[1])
+    return count
+
+
 def get_selling_avg(file_name):
     with open(file_name, 'r') as f:
         games= 0
@@ -12,3 +21,4 @@ def get_selling_avg(file_name):
             sold_copies += float(line[1])
         output = sold_copies / float(games)
     return output
+
