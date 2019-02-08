@@ -22,3 +22,15 @@ def get_selling_avg(file_name):
         output = sold_copies / float(games)
     return output
 
+
+def get_date_avg(file_name):
+    with open(file_name, 'r') as f:
+        dates = 0
+        years = 0
+        for line in f:
+            game_info = line.split('\t')
+            dates += 1
+            years += int(game_info[2])
+        avg_date = int(years / dates)+1
+    return avg_date
+        
