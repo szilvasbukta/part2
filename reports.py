@@ -74,3 +74,26 @@ def count_grouped_by_genre(file_name):
             line = line.split("\t")
             dict_of_games[line[3]] = dict_of_games.get(line[3], 0) + 1
         return dict_of_games
+
+
+def get_date_ordered(file_name):
+    years = []
+    ordered_titles = []
+    with open(file_name, 'r') as f:
+        for line in f:
+            game_info = line.split('\t')
+            game_info[2] = int(game_info[2])
+            if len(ordered_titles) == 0 or game_info[2] < years[-1]:
+                ordered_titles.append(game_info[0])
+                years.append(game_info[2])
+            else:
+                for y, year in enumerate(years):
+                    if game_info[2] == year and (game_info[0]).lower() < (ordered_titles[y]).lower():
+                        ordered_titles.insert(y, game_info[0])
+                        years.insert(y, game_info[2])
+                        break
+                    elif game_info[2] > year:
+                        ordered_titles.insert(y, game_info[0])
+                        years.insert(y, game_info[2])
+                        break
+        return ordered_titles
