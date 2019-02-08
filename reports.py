@@ -10,8 +10,6 @@ def get_most_played(file_name):
             if float(line[1]) > float(most_copies[1]):
                 most_copies[1] = line[1]
                 most_copies[0] = line[0]
-            elif float(line[1]) == float(most_copies[1]):
-                pass
         return most_copies[0]
 
 
@@ -67,3 +65,26 @@ def get_game(file_name, title):
             line[2] = int(line[2])
             if line[0] == title:
                 return line
+
+
+def get_date_ordered(file_name):
+    years = []
+    ordered_titles = []
+    with open(file_name, 'r') as f:
+        for line in f:
+            game_info = line.split('\t')
+            game_info[2] = int(game_info[2])
+            if len(ordered_titles) == 0 or game_info[2] < years[-1]:
+                ordered_titles.append(game_info[0])
+                years.append(game_info[2])
+            else:
+                for y, year in enumerate(years):
+                    if game_info[2] == year and (game_info[0]).lower() < (ordered_titles[y]).lower():
+                        ordered_titles.insert(y, game_info[0])
+                        years.insert(y, game_info[2])
+                        break
+                    elif game_info[2] > year:
+                        ordered_titles.insert(y, game_info[0])
+                        years.insert(y, game_info[2])
+                        break
+        return ordered_titles   
