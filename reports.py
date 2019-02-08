@@ -10,6 +10,8 @@ def get_most_played(file_name):
             if float(line[1]) > float(most_copies[1]):
                 most_copies[1] = line[1]
                 most_copies[0] = line[0]
+            elif float(line[1]) == float(most_copies[1]):
+                pass
         return most_copies[0]
 
 
