@@ -34,3 +34,13 @@ def get_selling_avg(file_name):
             sold_copies += float(line[1])
         output = sold_copies / float(games)
     return output
+
+
+def count_longest_title(file_name):
+    with open(file_name, 'r') as opened_file:
+        characters_long = [0]
+        for line in opened_file:
+            line = line.split("\t")
+            if len(line[0]) > characters_long[0]:
+                characters_long[0] = len(line[0])
+        return(characters_long[0])
